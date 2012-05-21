@@ -36,12 +36,7 @@ sub receiver {
     }
 
     if(defined(my $s = $result->{stdout})) {
-        my $res = $ua->post('http://np.imd555.com/api/post', {
-            body => encode_utf8($s),
-        });
-        return unless $res->is_redirect;
-        my $url = $res->header('Location');
-        $msg->chat->send_message($url);
+        $msg->chat->send_message(encode_utf8($s));
     }
 
     # error?
